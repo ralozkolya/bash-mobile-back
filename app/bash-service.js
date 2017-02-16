@@ -16,8 +16,6 @@ class Service {
         else
             url = baseUrl;
 
-        console.log(url);
-
         return this.parseHTML(url);
     }
 
@@ -51,11 +49,13 @@ class Service {
                         let text = $('.text', element);
                         let actions = $('.actions', element).not('.more');
                         let date = $('.date', actions).text();
+                        let votes = parseInt($('.rating', actions).text());
                         let id = $('.id', actions).attr('href').substring(7);
 
                         quotes.push({
                             id: id,
                             date: date,
+                            votes: votes,
                             text: text.html(),
                         });
                     });

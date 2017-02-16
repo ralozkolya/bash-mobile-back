@@ -15,8 +15,8 @@ app.use((request, response, next) => {
     next();
 });
 
-app.use(require('./routes/new'));
 app.use(require('./routes/random'));
+app.use(require('./routes/new'));
 app.use(require('./routes/404'));
 app.use(require('./routes/error'));
 
