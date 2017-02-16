@@ -7,8 +7,18 @@ let jQuery = fs.readFileSync('node_modules/jquery/dist/jquery.min.js');
 
 class Service {
 
-    getNew() {
-        return this.parseHTML(`${baseUrl}`);
+    getNew(page) {
+
+        let url;
+
+        if(page)
+            url = `${baseUrl}index/${page}`;
+        else
+            url = baseUrl;
+
+        console.log(url);
+
+        return this.parseHTML(url);
     }
 
     getRandom() {
@@ -50,7 +60,12 @@ class Service {
                         });
                     });
 
-                    resolve(quotes);
+                    let currentPage = $('.current > input').val();
+
+                    resolve({
+                        page: currentPage,
+                        quotes: quotes,
+                    });
                 }
             });
         });

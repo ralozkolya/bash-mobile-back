@@ -2,13 +2,14 @@ let express = require('express');
 let service = require('../bash-service');
 let router = express.Router();
 
-router.get('/api', (request, response, next) => {
+router.get('/api/:page?', (request, response, next) => {
 
-    service.getNew()
-        .then(quotes => {
+    service.getNew(request.params.page)
+        .then(data => {
             response.json({
                 status: 'success',
-                data: quotes,
+                data: data.quotes,
+                page: data.page,
             });
         })
         .catch(next);

@@ -5,10 +5,11 @@ let router = express.Router();
 router.get('/api/random', (request, response, next) => {
 
     service.getRandom()
-        .then(quotes => {
+        .then(data => {
             response.json({
                 status: 'success',
-                data: quotes,
+                data: data.quotes,
+                page: data.page,
             });
         })
         .catch(next);
