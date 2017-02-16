@@ -1,4 +1,5 @@
 let jsdom = require('jsdom');
+let request = require('request');
 let fs = require('fs');
 
 let baseUrl = 'http://bash.im/';
@@ -21,6 +22,15 @@ class Service {
 
     getRandom() {
         return this.parseHTML(`${baseUrl}random`);
+    }
+
+    vote(id, act) {
+        request.post(`${baseUrl}quote/${id}/${act}`, {
+            form: {
+                quote: id,
+                act: act,
+            }
+        });
     }
 
     parseHTML(url) {
