@@ -3,7 +3,7 @@ let service = require('../bash-service');
 let bodyParser = require('body-parser');
 let router = express.Router();
 
-router.use('/api/vote', bodyParser.json());
+router.use('/api/vote', bodyParser.urlencoded({extended: true}));
 
 router.post('/api/vote', (request, response, next) => {
 
