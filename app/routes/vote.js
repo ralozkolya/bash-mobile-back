@@ -1,15 +1,17 @@
 let express = require('express');
 let service = require('../bash-service');
+let bodyParser = require('body-parser');
 let router = express.Router();
+
+router.use('/api/vote', bodyParser.json());
 
 router.post('/api/vote', (request, response, next) => {
 
-    console.log(request.body);
+    let quote = request.body.quote;
+    let act = request.body.act;
 
-    return;
-
-    service.vote(request.params.page)
-        .then(data => {
+    service.vote(quote, act)
+        .then(() => {
             response.json({
                 status: 'success',
             });

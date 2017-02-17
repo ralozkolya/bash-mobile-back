@@ -24,12 +24,22 @@ class Service {
         return this.parseHTML(`${baseUrl}random`);
     }
 
-    vote(id, act) {
-        request.post(`${baseUrl}quote/${id}/${act}`, {
-            form: {
-                quote: id,
-                act: act,
-            }
+    vote(quote, act) {
+        return new Promise((resolve, reject) => {
+            request.post(`${baseUrl}quote/${quote}/${act}`, {
+                form: {
+                    quote: quote,
+                    act: act,
+                }
+            }, (error, httpResponse, body) => {
+
+                if(error) {
+                    reject(error);
+                    return;
+                }
+
+                resolve(body);
+            });
         });
     }
 

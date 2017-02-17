@@ -1,6 +1,5 @@
 let express = require('express');
 let handlebars = require('express-handlebars');
-let bodyParser = require('body-parser');
 let app = express();
 
 app.set('port', process.env.PORT || 3000);
@@ -17,8 +16,6 @@ app.use((request, response, next) => {
     });
     next();
 });
-
-app.use(bodyParser);
 
 app.use(require('./routes/random'));
 app.use(require('./routes/vote'));
